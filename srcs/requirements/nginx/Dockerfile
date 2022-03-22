@@ -4,9 +4,9 @@ WORKDIR  /home/app
 
 COPY . .
 
-RUN sh ./tools/setup.sh
+EXPOSE 80 443
 
-EXPOSE 80
+RUN sh ./tools/setup.sh
 
 CMD ["service","nginx", "start"]
 
