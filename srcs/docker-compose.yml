@@ -2,5 +2,24 @@ version: '3'
 services: 
     nginx:
         build: ./requirements/nginx
+        container_name: nginx
         ports:
             - "443:443"
+        networks:
+            - Inception-network
+        restart: always
+        depends_on:
+            - wordpress
+
+    wordpress:
+        build: ./requirements/wordpress
+        container_name: wordpress
+        ports:
+            - "9000"
+        networks:
+            - Inception-network
+        restart: always
+
+networks:
+    Inception-network:
+        name: Inception-network
