@@ -2,24 +2,38 @@ version: '3'
 services: 
     nginx:
         build: ./requirements/nginx
+        image: nginx_inception
         container_name: nginx
         ports:
             - "443:443"
         networks:
             - Inception-network
+        volumes:
+            -  wordpress_data:/var/www/html/
         restart: always
         depends_on:
             - wordpress
 
     wordpress:
         build: ./requirements/wordpress
+        image: wordpress_inception
         container_name: wordpress
         ports:
             - "9000"
         networks:
             - Inception-network
+        volumes:
+            -  wordpress_data:/var/www/html
         restart: always
 
+volumes: 
+    wordpress_data:
+        driver: local
+        driver_opts:
+            type: none
+            device: "/home/inception/data/wordpress_data"
+            o: bind
 networks:
     Inception-network:
         name: Inception-network
+        driver: bridge
