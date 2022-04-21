@@ -5,6 +5,6 @@ if [ ! -d "/var/lib/mysql/wordpress" ]; then
         mysql -u root -e "GRANT ALL PRIVILEGES ON $WORDPRESS_DB_NAME.* TO '$MYSQL_USER'@'%';"
         mysql -u root -e "FLUSH PRIVILEGES;"
         mysql -u $MYSQL_USER --password=$MYSQL_PASSWORD $MYSQL_DATABASE < ./conf/wp.sql 
-        mysqladmin --user=root password $MSQL_ROOT_PASS
+        mysqladmin --user=root password $MYSQL_ROOT_PASSWORD
 fi
     mysqld_safe
