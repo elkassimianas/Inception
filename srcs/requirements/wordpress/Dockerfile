@@ -8,8 +8,10 @@ RUN sh ./tools/setup.sh
 
 WORKDIR /var/www/html/
 
-RUN cp -a /tmp/wordpress/. /var/www/html/ && \
-    mkdir /var/www/html/wordpress && \
-    chown -R www-data:www-data /var/www/html/wordpress/
+RUN mkdir /var/www/html/wordpress && \
+    cp -a /tmp/wordpress/. /var/www/html/ && \
+    chown -R www-data:www-data /var/www/html
+
+COPY ./conf/wp-config.php /var/www/html
 
 CMD ["php-fpm7.3", "-F", "-R"]
