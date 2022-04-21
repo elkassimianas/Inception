@@ -1,6 +1,7 @@
 server {
 	listen 443 ssl;
 	listen [::]:443 ssl;
+	ssl_protocols TLSv1.2;
 	ssl_certificate /root/localhost.crt;
 	ssl_certificate_key /root/localhost.key;
 
@@ -12,11 +13,9 @@ server {
 
 	location ~ \.php$ {
 		include snippets/fastcgi-php.conf;
-		#fastcgi_pass unix:/run/php/php7.3-fpm.sock;
 		fastcgi_pass wordpress:9000;
 	}
 	location / {
-		#autoindex on;
 		try_files $uri $uri/ =404;
 	}
 }
