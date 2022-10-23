@@ -2,7 +2,7 @@ version: '3'
 services: 
     nginx:
         build: ./requirements/nginx
-        image: nginx_inception
+        image: nginx
         container_name: nginx
         ports:
             - "443:443"
@@ -16,7 +16,7 @@ services:
 
     wordpress:
         build: ./requirements/wordpress
-        image: wordpress_inception
+        image: wordpress
         container_name: wordpress
         ports:
             - "9000"
@@ -32,7 +32,7 @@ services:
 
     mariadb:
         build: ./requirements/mariadb
-        image: mariadb_inception
+        image: mariadb
         container_name: mariadb
         ports:
             - "3306"
@@ -81,13 +81,13 @@ volumes:
         driver: local
         driver_opts:
             type: none
-            device: "/home/inception/data/wordpress_data"
+            device: "/home/ael-kass/data/wordpress"
             o: bind
     mysql_data:
         driver: local
         driver_opts:
             type: none
-            device: "/home/inception/data/mysql"
+            device: "/home/ael-kass/data/mysql"
             o: bind
 networks:
     Inception-network:
