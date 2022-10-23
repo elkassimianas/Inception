@@ -1,14 +1,12 @@
 FROM debian:buster
 
-RUN apt-get update; apt-get upgrade -y
+RUN apt update && apt install vsftpd openssl openssh-server -y
 
-RUN apt-get install -y vsftpd openssl openssh-server
+COPY tools/start.sh .
 
-COPY ./conf/vsftpd.conf /etc/
+RUN yes "" | openssl req -x509 -nodes -days 365 -newkey rsa:2048\
+    -keyout /etc/ssl/private/vsftpd.key -out /etc/ssl/certs/vsftpd.crt
 
-RUN yes ""| openssl req -x509 -nodes -days 365 -newkey \
- rsa:2048 -keyout /etc/ssl/private/vsftpd.key -out /etc/ssl/certs/vsftpd.crt
+COPY conf/vsftpd.conf /etc
 
-COPY ./tools/start.sh .
-
-ENTRYPOINT ["sh", "start.sh"]
+ENTRYPOINT [ "/bin/bash", "-i", "start.sh" ]

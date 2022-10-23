@@ -4,6 +4,8 @@ COPY . .
 
 EXPOSE 9000
 
+COPY ./tools/setup.sh .
+
 RUN sh ./tools/setup.sh
 
 WORKDIR /var/www/html/
@@ -14,4 +16,10 @@ RUN mkdir /var/www/html/wordpress && \
 
 COPY ./conf/wp-config.php /var/www/html
 
-CMD ["php-fpm7.3", "-F", "-R"]
+WORKDIR /tmp
+COPY ./tools/start.sh .
+
+RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -O /usr/local/bin/wp
+RUN chmod +x /usr/local/bin/wp
+
+ENTRYPOINT ["sh", "start.sh"]

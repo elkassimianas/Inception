@@ -1,10 +1,9 @@
-# create user
-adduser --disabled-password --gecos "" ${FTP_USER}
-echo "${FTP_USER}:${FTP_PASS}" | chpasswd
+useradd -m ael-kass1
+echo ael-kass1:ael-kass1 | chpasswd
 
 service vsftpd start
 service vsftpd stop
 
-chown -R ${FTP_USER}:${FTP_USER} /home/${FTP_USER}
+chown -R ael-kass1:ael-kass1 /home/ael-kass1
 # start ftp daemon
 vsftpd

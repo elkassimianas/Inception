@@ -29,6 +29,7 @@ services:
             - .env
         depends_on:
             - mariadb
+            - redis
 
     mariadb:
         build: ./requirements/mariadb
@@ -40,7 +41,7 @@ services:
             - Inception-network
         volumes:
             - mysql_data:/var/lib/mysql
-        env_file:
+        environment:
             - .env
         restart: always
 
@@ -53,6 +54,7 @@ services:
         restart: always
         networks:
             - Inception-network
+
     website:
         build: ./requirements/bonus/website
         image: website_inception
@@ -60,21 +62,34 @@ services:
         ports:
             - "8080:8080"
         restart: always
+
+
     ftp:
         build: ./requirements/bonus/ftp
         image: ftp_inception
         container_name: ftp
-        env_file:
+        environment:
             - .env
         ports:
             - "21:21"
-        depends_on:
-            - wordpress
+            - "10000:10000"
+        # depends_on:
+        #     - wordpress
         volumes:
-            -  wordpress_data:/home/ftpkassimi
+            -  wordpress_data:/home/ael-kass
         networks:
             - Inception-network
         restart: always
+
+
+    redis:
+        build: ./requirements/bonus/redis
+        image: redis_inception
+        container_name: redis
+        networks:
+            - Inception-network
+        restart: always
+
 
 volumes: 
     wordpress_data:
