@@ -44,6 +44,37 @@ services:
             - .env
         restart: always
 
+    adminer:
+        build: ./requirements/bonus/adminer
+        image: adminer_inception
+        container_name: adminer
+        ports:
+            - "7777:7777"
+        restart: always
+        networks:
+            - Inception-network
+    website:
+        build: ./requirements/bonus/website
+        image: website_inception
+        container_name: website
+        ports:
+            - "8080:8080"
+        restart: always
+    ftp:
+        build: ./requirements/bonus/ftp
+        image: ftp_inception
+        container_name: ftp
+        env_file:
+            - .env
+        ports:
+            - "21:21"
+        depends_on:
+            - wordpress
+        volumes:
+            -  wordpress_data:/home/ftpkassimi
+        networks:
+            - Inception-network
+        restart: always
 
 volumes: 
     wordpress_data:

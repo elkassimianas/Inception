@@ -1,10 +1,13 @@
 all:
-	docker-compose -f srcs/docker-compose.yml up -d --build
+	sudo docker-compose -f srcs/docker-compose.yml up -d --build
 clean:
-	docker rm -f $(docker ps -a -q)
-	docker rmi $(docker images -a)
-	docker volume rm $(docker volume ls -a)
+	sudo docker rm -v $(docker ps -a -q)
+	sudo docker rmi $(docker images -a)
+	sudo docker volume rm $(docker volume ls -a)
 down:
-	docker-compose -f srcs/docker-compose.yml down -v --rmi all
+	sudo docker-compose -f srcs/docker-compose.yml down
+
 config:
-	docker-compose -f srcs/docker-compose.yml config
+	sudo docker-compose -f srcs/docker-compose.yml config
+
+re: down clean all
