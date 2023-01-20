@@ -1,6 +1,6 @@
 # Inception
 
-School 42 Project. Set up a small infrastructure composed of WordPress with LEMP Stack (Nginx, MariaDB and PHP) using Docker / Docker-Compose under specific rules (see Subject.pdf).
+School 1337 Project. Set up a small infrastructure composed of WordPress with LEMP Stack (Nginx, MariaDB and PHP) using Docker / Docker-Compose under specific rules (see Subject.pdf).
 
 
 #Final grade: 100/100
