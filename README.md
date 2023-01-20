@@ -3,9 +3,9 @@
 School 1337 Project. Set up a small infrastructure composed of WordPress with LEMP Stack (Nginx, MariaDB and PHP) using Docker / Docker-Compose under specific rules (see Subject.pdf).
 
 
-#Final grade: 100/100
+# Final grade: 100/100
 
-#Docker containers
+# Docker containers
 
   * MariaDB
   * WordPress
