@@ -1,6 +1,6 @@
 apt-get update -y; apt-get upgrade -y
 apt-get install -y nginx
-chmod 777 /etc/nginx/nginx.conf
+chmod 744 /etc/nginx/nginx.conf
 cp ./conf/default /etc/nginx/sites-available/
 cp ./conf/localhost.crt /root/
 cp ./conf/localhost.key /root/
